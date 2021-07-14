@@ -57,7 +57,7 @@ router.post("/upload", async (req, res) => {
     console.log("message", err.message)
     console.log("err", err.response.data)
     console.log("status", err.response.status)
-    res.status(err.response.status).send(err)
+    res.status(err.response.status).json(err.response.data)
   }
 })
 
@@ -78,7 +78,7 @@ router.post("/uploadConfirm", async (req, res) => {
     console.log(result.data)
     res.status(200).send(result.data)
   } catch (err) {
-    res.status(err.response.status).send(err.response)
+    res.status(err.response.status).send(err.response.data)
   }
 })
 
