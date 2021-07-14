@@ -25,11 +25,12 @@ router.post("/login", async (req, res) => {
     )
     console.log(result.data)
     localStorage.setItem("token_server", result.data.access_token)
-    console.log(localStorage.getItem("token_server"))
+    localStorage.getItem("token_server")
     res.status(200).send(result.data)
   } catch (err) {
-    console.log(err.message)
-    res.status(500).json(err)
+    console.log("message", err.message)
+    console.log("message", err.response.data)
+    res.status(err.response.status).send(err.response.data)
   }
 })
 
@@ -53,8 +54,10 @@ router.post("/upload", async (req, res) => {
     console.log(result.data.result)
     res.status(200).send(result.data)
   } catch (err) {
-    console.log(err.message)
-    res.status(500).send(err)
+    console.log("message", err.message)
+    console.log("err", err.response.data)
+    console.log("status", err.response.status)
+    res.status(err.response.status).send(err)
   }
 })
 
@@ -75,8 +78,7 @@ router.post("/uploadConfirm", async (req, res) => {
     console.log(result.data)
     res.status(200).send(result.data)
   } catch (err) {
-    console.log(err.message)
-    res.status(err.response.status).send(err)
+    res.status(err.response.status).send(err.response)
   }
 })
 
